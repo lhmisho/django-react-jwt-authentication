@@ -1,4 +1,10 @@
-import { LOGIN_SUCCESS, LOGIN_FAILED, USER_LOADED_FAILED, USER_LOADED_SUCCESS} from "../actions/types";
+import {
+    LOGIN_SUCCESS,
+    LOGIN_FAILED,
+    USER_LOADED_FAILED,
+    USER_LOADED_SUCCESS,
+    AUTHENTICATED_SUCCESS, LOGOUT
+} from "../actions/types";
 
 const initialState = {
     access: localStorage.getItem('access'),
@@ -19,6 +25,11 @@ export default (state=initialState, action) => {
                 access: payload.access,
                 refresh: payload.refresh
             }
+        case AUTHENTICATED_SUCCESS:
+            return {
+                ...state,
+                isAuthenticated: true
+            }
         case USER_LOADED_SUCCESS:
             return {
                 ...state,
@@ -30,6 +41,7 @@ export default (state=initialState, action) => {
                 user: null
             }
         case LOGIN_FAILED:
+        case LOGOUT:
             localStorage.removeItem('access')
             localStorage.removeItem('refresh')
             return {

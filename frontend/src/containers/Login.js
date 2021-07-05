@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import {connect} from 'react-redux'
 import {Link} from "react-router-dom";
 import {login} from "../actions/auth";
-
-const Login = ({login}) => {
+import { Redirect } from 'react-router-dom'
+const Login = ({login, isAuthenticated}) => {
     const [formData, setFormdata] = useState({
         username: '',
         password: ''
@@ -13,6 +13,9 @@ const Login = ({login}) => {
     const onSubmitHandler = e => {
         e.preventDefault()
         login (username, password)
+    }
+    if(isAuthenticated){
+        return <Redirect to='/'/>
     }
     return (
         <div className="container mt-5">
@@ -47,5 +50,8 @@ const Login = ({login}) => {
         </div>
     );
 };
+const mapStateToProps = state => ({
+    isAuthenticated: state.auth.isAuthenticated
+})
 
-export default connect(null, {login})(Login);
+export default connect(mapStateToProps, {login})(Login);
