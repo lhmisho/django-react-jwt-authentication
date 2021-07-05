@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux'
 import {Link} from "react-router-dom";
+import {login} from "../actions/auth";
 
-const Login = () => {
+const Login = ({login}) => {
     const [formData, setFormdata] = useState({
         username: '',
         password: ''
@@ -11,7 +12,7 @@ const Login = () => {
     const onChangeHandler = e => setFormdata({...formData, [e.target.name]: e.target.value})
     const onSubmitHandler = e => {
         e.preventDefault()
-        // login (username, password)
+        login (username, password)
     }
     return (
         <div className="container mt-5">
@@ -47,4 +48,4 @@ const Login = () => {
     );
 };
 
-export default connect(null, {})(Login);
+export default connect(null, {login})(Login);

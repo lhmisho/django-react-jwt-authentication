@@ -10,6 +10,7 @@ import Activate from './containers/Activate'
 import {compose} from "redux";
 import store from "./store";
 import {Provider} from "react-redux";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const App = () => {
     return (
